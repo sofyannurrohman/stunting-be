@@ -1,28 +1,25 @@
 import os
 from fastapi import APIRouter
 import subprocess
+from urllib.parse import urlparse
 
 router = APIRouter()
 
 @router.post("/import-sql")
 def import_sql():
-    db_url = os.getenv("DATABASE_URL")  # Example: mysql://user:pass@host:port/db
+    db_url = os.getenv("DATABASE_URL")
     if not db_url:
         return {"error": "DATABASE_URL not found"}
 
-    # Parse URL
-    import re
-    pattern = r'mysql://(.*?):(.*?)@(.*?):(.*?)/(.*)'
-    match = re.match(pattern, db_url)
-    if not match:
-        return {"error": "DATABASE_URL format invalid"}
+    parsed = urlparse(db_url)
+    user = parsed.username
+    password = parsed.password
+    host = parsed.hostname
+    port = str(parsed.port)
+    database = parsed.path.lstrip('/')
 
-    user, password, host, port, database = match.groups()
-
-    # Path to the SQL file in container
     sql_file_path = "static/stunting.sql"
 
-    # Run mysql import
     result = subprocess.run(
         [
             "mysql",
@@ -38,8 +35,6 @@ def import_sql():
     )
 
     if result.returncode != 0:
-        return {
-            "error": result.stderr.decode()
-        }
+        return {"error": result.stderr.decode()}
 
     return {"message": "SQL import successful"}
