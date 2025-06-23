@@ -41,11 +41,16 @@ def read_user(current_user: User = Depends(get_current_user)):
 
 @app.get("/init-db")
 async def init_db():
+    database_url = os.getenv("DATABASE_URL")
+    if not database_url:
+        return {"error": "DATABASE_URL not set"}
+
     alembic_cfg = Config("alembic.ini")
-    alembic_cfg.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+    alembic_cfg.set_main_option("sqlalchemy.url", database_url)
     command.upgrade(alembic_cfg, "head")
+
     return {"message": "Migration done"}
-# ✅ Tambahkan block ini agar bisa run di Railway
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))  # PORT akan di-set otomatis oleh Railway
