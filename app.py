@@ -6,7 +6,8 @@ from db.models.user import User
 from utils.dependencies import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-
+from alembic import command
+from alembic.config import Config
 app = FastAPI()
 
 # Mount static files (if needed)
@@ -38,6 +39,12 @@ app.include_router(predict.router, prefix="/api/v1")
 def read_user(current_user: User = Depends(get_current_user)):
     return {"email": current_user.email}
 
+@app.get("/init-db")
+async def init_db():
+    alembic_cfg = Config("alembic.ini")
+    alembic_cfg.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+    command.upgrade(alembic_cfg, "head")
+    return {"message": "Migration done"}
 # ✅ Tambahkan block ini agar bisa run di Railway
 if __name__ == "__main__":
     import uvicorn
