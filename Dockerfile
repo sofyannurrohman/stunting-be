@@ -4,6 +4,7 @@ WORKDIR /code
 
 # Install system-level dependencies
 RUN apt-get update && \
+    mysql-client \
     apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
