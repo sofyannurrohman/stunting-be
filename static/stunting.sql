@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `information` (
 -- Dumping data for table `information`
 --
 
-INSERT INTO `information` (`id`, `title`, `content`, `image_url`, `createdAt`, `updatedAt`, `category`, `source`) VALUES
+INSERT IGNORE INTO `information` (`id`, `title`, `content`, `image_url`, `createdAt`, `updatedAt`, `category`, `source`) VALUES
 (5, 'Pentingnya Imunisasi untuk Anak', 'Imunisasi melindungi anak dari penyakit berbahaya seperti campak, polio, dan hepatitis. Pemerintah menyarankan imunisasi lengkap pada tahun pertama kehidupan anak.', '/static/uploads/6ef7a0d374a0417c951a7ce97fa0ac97.png', '2025-05-21 07:50:51', '2025-05-21 07:50:51', 'Kesehatan Anak', 'https://www.kemkes.go.id/article/view/202103170001/pentingnya-imunisasi-bagi-anak.html'),
 (6, 'Manfaat ASI Eksklusif Selama 6 Bulan', 'ASI eksklusif mengandung nutrisi penting dan antibodi yang membantu meningkatkan daya tahan tubuh bayi. WHO menyarankan pemberian ASI eksklusif selama 6 bulan pertama.', '/static/uploads/27aa330c8b204b809cd3953c73d9f8ff.png', '2025-05-21 07:58:22', '2025-05-21 07:58:22', 'Gizi Bayi', 'https://www.alodokter.com/asi-eksklusif'),
 (7, 'Cara Menjaga Kesehatan Ibu Hamil', 'Ibu hamil perlu menjaga pola makan sehat, rutin berolahraga ringan, dan memeriksakan kehamilan secara berkala ke bidan atau dokter kandungan.', '/static/uploads/5158da5904bc43dabe3c3a9f604d27fa.png', '2025-05-21 08:02:39', '2025-05-21 08:02:39', 'Kehamilan', 'https://hellosehat.com/kehamilan/kesehatan-ibu-hamil/menjaga-kesehatan-ibu-hamil'),
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `toddlers` (
 -- Dumping data for table `toddlers`
 --
 
-INSERT INTO `toddlers` (`id`, `age_months`, `weight_kg`, `height_cm`, `gender`, `name`, `user_id`, `createdAt`, `updatedAt`, `predicted`) VALUES
+INSERT IGNORE INTO `toddlers` (`id`, `age_months`, `weight_kg`, `height_cm`, `gender`, `name`, `user_id`, `createdAt`, `updatedAt`, `predicted`) VALUES
 (2, 40, 13, 96, 'Laki-laki', 'Mevan Fadhilah', 2, '2025-05-17 21:59:58', '2025-05-17 21:59:58', 'Normal_Risk of Overweight'),
 (3, 21, 9, 81, 'Perempuan', 'Gibran', 6, '2025-05-17 22:09:05', '2025-05-17 22:09:05', 'Normal_Normal weight'),
 (4, 3, 5, 60, 'Laki-laki', 'Putra Wijaya', 4, '2025-05-17 22:12:02', '2025-05-17 22:12:02', 'Severely Stunted_Normal weight'),
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `createdAt`, `updatedAt`, `hashed_password`, `role`) VALUES
+INSERT IGNORE INTO `users` (`id`, `name`, `email`, `createdAt`, `updatedAt`, `hashed_password`, `role`) VALUES
 (2, 'admin', 'admin@admin.com', '2025-05-06 09:52:10', '2025-05-06 09:52:10', '$2b$12$lmWUDu1CUyzy2Ttfejs9h.HblpgD/3h48EtNjeSFhiLu0nVZ.x4cS', 'admin'),
 (4, 'sofyan', 'sofyan@gmail.com', '2025-05-15 19:02:03', '2025-05-15 19:02:03', '$2b$12$gHKDRmWfBAk2ExlbX5v2K.2f28JUApDSbJZGBmmOueDGl04lWfZtW', 'admin'),
 (6, 'Siti Nurhaliza', 'siti.nurhaliza@gmail.com', '2025-05-20 22:33:17', '2025-05-20 22:33:17', '$2b$12$/UJ3kpgoZf6SB0k5RrmviuR57o7SMB6qN.NHgzlUmrcUHaHmag7xS', 'user'),
