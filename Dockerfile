@@ -1,44 +1,30 @@
-# Stage 1: Builder
-FROM python:3.10-alpine AS builder
+FROM python:3.10-slim
 
 WORKDIR /code
 
-# Install system dependencies
-RUN apk add --no-cache \
+# Install system-level dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
     gcc \
-    musl-dev \
-    linux-headers \
     g++ \
-    openblas-dev
+    libffi-dev \
+    libssl-dev \
+    libopenblas-dev \
+    libpq-dev \
+    libcurl4-openssl-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libjpeg-dev \
+    zlib1g-dev \
+    libmysqlclient-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy production requirements
+# Copy requirements and install
 COPY requirements-prod.txt .
-
-# Install dependencies
 RUN pip install --no-cache-dir -r requirements-prod.txt
 
-# Stage 2: Runtime
-FROM python:3.10-alpine
-
-WORKDIR /code
-
-# Copy installed dependencies
-COPY --from=builder /root/.local /root/.local
-
-# Copy application files
-COPY app.py .
-COPY api/ ./api/
-COPY db/ ./db/
-COPY schemas/ ./schemas/
-COPY services/ ./services/
-COPY static/ ./static/
-COPY utils/ ./utils/
-COPY le_condition.joblib .
-COPY model.joblib .
-COPY scaler.joblib .
-
-# Set PATH
-ENV PATH=/root/.local/bin:$PATH
+# Copy the entire project
+COPY . .
 
 # Run the app
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}"]
