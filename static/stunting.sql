@@ -151,15 +151,15 @@ INSERT IGNORE INTO `users` (`id`, `name`, `email`, `createdAt`, `updatedAt`, `ha
 --
 -- Indexes for table `alembic_version`
 --
-ALTER TABLE `alembic_version`
-  ADD PRIMARY KEY (`version_num`);
+-- ALTER TABLE `alembic_version`
+--   ADD PRIMARY KEY (`version_num`);
 
---
--- Indexes for table `information`
---
-ALTER TABLE `information`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ix_information_id` (`id`);
+-- --
+-- -- Indexes for table `information`
+-- --
+-- ALTER TABLE `information`
+--   ADD PRIMARY KEY (`id`),
+--   ADD KEY `ix_information_id` (`id`);
 
 --
 -- Indexes for table `toddlers`
