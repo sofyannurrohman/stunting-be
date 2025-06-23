@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `alembic_version`
 --
 
-CREATE TABLE `alembic_version` (
+CREATE TABLE IF NOT EXISTS `alembic_version` (
   `version_num` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -44,7 +44,7 @@ INSERT INTO `alembic_version` (`version_num`) VALUES
 -- Table structure for table `information`
 --
 
-CREATE TABLE `information` (
+CREATE TABLE IF NOT EXISTS `information` (
   `id` int NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `content` varchar(1000) DEFAULT NULL,
@@ -72,7 +72,7 @@ INSERT INTO `information` (`id`, `title`, `content`, `image_url`, `createdAt`, `
 -- Table structure for table `toddlers`
 --
 
-CREATE TABLE `toddlers` (
+CREATE TABLE IF NOT EXISTS `toddlers` (
   `id` int NOT NULL,
   `age_months` int DEFAULT NULL,
   `weight_kg` int DEFAULT NULL,
@@ -115,7 +115,7 @@ INSERT INTO `toddlers` (`id`, `age_months`, `weight_kg`, `height_cm`, `gender`, 
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
