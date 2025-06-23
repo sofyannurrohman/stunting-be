@@ -3,7 +3,8 @@ FROM python:3.10-slim
 WORKDIR /code
 
 # Install system-level dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
     g++ \
@@ -17,14 +18,16 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     zlib1g-dev \
     libmysqlclient-dev \
-    && rm -rf /var/lib/apt/lists/*
+    git \
+    curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install
+# Install Python dependencies
 COPY requirements-prod.txt .
 RUN pip install --no-cache-dir -r requirements-prod.txt
 
-# Copy the entire project
+# Copy project files
 COPY . .
 
-# Run the app
+# Run the app with dynamic port from Railway
 CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}"]
