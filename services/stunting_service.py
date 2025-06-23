@@ -17,8 +17,14 @@ le_condition = joblib.load('le_condition.joblib')
 load_dotenv()
 # Initialize OpenAI
 AI_MODEL = os.getenv("AI_MODEL")
-api_key = os.getenv("OPENAI_API_KEY")
-openai = OpenAI(api_key=api_key)
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+# Raise clear error if missing
+if not OPENAI_API_KEY:
+    raise EnvironmentError("Environment variable OPENAI_API_KEY is not set.")
+
+# Initialize OpenAI client
+openai = OpenAI(api_key=OPENAI_API_KEY)
 
 
 class StuntingService:
