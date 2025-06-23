@@ -5,7 +5,7 @@ WORKDIR /code
 # Install system-level dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    mysql-client \
+    default-mysql-client \
     build-essential \
     gcc \
     g++ \
