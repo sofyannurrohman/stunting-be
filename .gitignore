@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Pytest cache
+.pytest_cache/
+.cache/
+
+# Env config
+.env
+
+# Docker ignore
+.dockerignore
+
+# VSCode / PyCharm / Editor configs
+.vscode/
+.idea/
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Alembic migration cache (opsional jika tidak ingin include history)
+alembic/versions/
