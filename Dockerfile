@@ -17,7 +17,7 @@ RUN apt-get update && \
     libxslt1-dev \
     libjpeg-dev \
     zlib1g-dev \
-    libmysqlclient-dev \
+    libmariadb-dev \
     git \
     curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -29,5 +29,5 @@ RUN pip install --no-cache-dir -r requirements-prod.txt
 # Copy project files
 COPY . .
 
-# Run the app with dynamic port from Railway
+# Run the app (Railway injects $PORT)
 CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}"]
