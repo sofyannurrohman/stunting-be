@@ -15,7 +15,7 @@ RUN apk add --no-cache \
 COPY requirements-prod.txt .
 
 # Install dependencies
-RUN pip install --no-cache-dir --user -r requirements-prod.txt
+RUN pip install --no-cache-dir -r requirements-prod.txt
 
 # Stage 2: Runtime
 FROM python:3.10-alpine
