@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS `alembic_version` (
 -- Dumping data for table `alembic_version`
 --
 
-INSERT INTO `alembic_version` (`version_num`) VALUES
-('e15901cbcfc5');
+-- INSERT INTO `alembic_version` (`version_num`) VALUES
+-- ('e15901cbcfc5');
 
 -- --------------------------------------------------------
 
