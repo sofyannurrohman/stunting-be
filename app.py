@@ -41,15 +41,21 @@ def read_user(current_user: User = Depends(get_current_user)):
 
 @app.get("/init-db")
 async def init_db():
-    database_url = os.getenv("DATABASE_URL")
-    if not database_url:
-        return {"error": "DATABASE_URL not set"}
+    try:
+        database_url = os.getenv("DATABASE_URL")
+        if not database_url:
+            return {"error": "DATABASE_URL not set"}
+        
+        alembic_cfg = Config("alembic.ini")
+        alembic_cfg.set_main_option("sqlalchemy.url", database_url)
+        command.upgrade(alembic_cfg, "head")
 
-    alembic_cfg = Config("alembic.ini")
-    alembic_cfg.set_main_option("sqlalchemy.url", database_url)
-    command.upgrade(alembic_cfg, "head")
-
-    return {"message": "Migration done"}
+        return {"message": "Migration successful"}
+    
+    except Exception as e:
+        # log ke terminal
+        print("Error during alembic upgrade:", str(e))
+        return {"error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn
