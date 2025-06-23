@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI, Depends
 from api.v1.routers import predict
-from api.v1.routers import user, toddler, information, auth
+from api.v1.routers import user, toddler, information, auth, admin
 from db.models.user import User
 from utils.dependencies import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,7 +33,7 @@ app.include_router(user.router, prefix="/api/v1")
 app.include_router(toddler.router, prefix="/api/v1")
 app.include_router(information.router, prefix="/api/v1")
 app.include_router(predict.router, prefix="/api/v1")
-
+app.include_router(admin.router, prefix="/api/v1")
 # Sample protected endpoint
 @app.get("/me")
 def read_user(current_user: User = Depends(get_current_user)):

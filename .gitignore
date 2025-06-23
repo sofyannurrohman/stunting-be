@@ -25,4 +25,5 @@ __pycache__/
 Thumbs.db
 
 # Alembic migration cache (opsional jika tidak ingin include history)
-alembic/versions/
+alembic/__pycache__/
+
