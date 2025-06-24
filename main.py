@@ -37,7 +37,9 @@ app.include_router(admin.router, prefix="/api/v1")
 @app.get("/me")
 def read_user(current_user: User = Depends(get_current_user)):
     return {"email": current_user.email}
-
+@app.get("/")
+def health_check():
+    return {"status": "ok"}
 @app.get("/init-db")
 async def init_db():
     try:
@@ -56,5 +58,4 @@ async def init_db():
 
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8000))  # Railway provides this
-    uvicorn.run("main:app", host="0.0.0.0", port=port)
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
