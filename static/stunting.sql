@@ -44,27 +44,27 @@ CREATE TABLE IF NOT EXISTS `alembic_version` (
 -- Table structure for table `information`
 --
 
--- CREATE TABLE IF NOT EXISTS `information` (
---   `id` int NOT NULL,
---   `title` varchar(255) DEFAULT NULL,
---   `content` varchar(1000) DEFAULT NULL,
---   `image_url` varchar(255) DEFAULT NULL,
---   `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
---   `updatedAt` datetime DEFAULT CURRENT_TIMESTAMP,
---   `category` varchar(255) DEFAULT NULL,
---   `source` varchar(255) DEFAULT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `information` (
+  `id` int NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime DEFAULT CURRENT_TIMESTAMP,
+  `category` varchar(255) DEFAULT NULL,
+  `source` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --
--- -- Dumping data for table `information`
--- --
+--
+-- Dumping data for table `information`
+--
 
--- INSERT IGNORE INTO `information` (`id`, `title`, `content`, `image_url`, `createdAt`, `updatedAt`, `category`, `source`) VALUES
--- (5, 'Pentingnya Imunisasi untuk Anak', 'Imunisasi melindungi anak dari penyakit berbahaya seperti campak, polio, dan hepatitis. Pemerintah menyarankan imunisasi lengkap pada tahun pertama kehidupan anak.', '/static/uploads/6ef7a0d374a0417c951a7ce97fa0ac97.png', '2025-05-21 07:50:51', '2025-05-21 07:50:51', 'Kesehatan Anak', 'https://www.kemkes.go.id/article/view/202103170001/pentingnya-imunisasi-bagi-anak.html'),
--- (6, 'Manfaat ASI Eksklusif Selama 6 Bulan', 'ASI eksklusif mengandung nutrisi penting dan antibodi yang membantu meningkatkan daya tahan tubuh bayi. WHO menyarankan pemberian ASI eksklusif selama 6 bulan pertama.', '/static/uploads/27aa330c8b204b809cd3953c73d9f8ff.png', '2025-05-21 07:58:22', '2025-05-21 07:58:22', 'Gizi Bayi', 'https://www.alodokter.com/asi-eksklusif'),
--- (7, 'Cara Menjaga Kesehatan Ibu Hamil', 'Ibu hamil perlu menjaga pola makan sehat, rutin berolahraga ringan, dan memeriksakan kehamilan secara berkala ke bidan atau dokter kandungan.', '/static/uploads/5158da5904bc43dabe3c3a9f604d27fa.png', '2025-05-21 08:02:39', '2025-05-21 08:02:39', 'Kehamilan', 'https://hellosehat.com/kehamilan/kesehatan-ibu-hamil/menjaga-kesehatan-ibu-hamil'),
--- (8, 'Stunting pada Anak: Penyebab dan Pencegahan', 'Stunting adalah kondisi gagal tumbuh akibat kekurangan gizi kronis. Pencegahan dilakukan sejak 1000 hari pertama kehidupan anak dengan nutrisi yang cukup dan pola asuh yang baik.', '/static/uploads/1faff06b31c44adc88d046789905e4bd.png', '2025-05-21 08:05:17', '2025-05-21 08:05:17', 'Stunting', 'ttps://www.who.int/indonesia/news/detail/06-03-2020-pencegahan-stunting'),
--- (9, 'Tips Mencegah Diare pada Balita', 'Cuci tangan sebelum makan dan setelah buang air, serta pastikan air minum yang diberikan sudah matang. Diare bisa menyebabkan dehidrasi berat pada anak.', '/static/uploads/1f1b826f173a4e61b9194b64667a9148.png', '2025-05-21 08:07:11', '2025-05-21 08:07:11', 'Penyakit Anak', 'https://www.cdc.gov/handwashing/global-handwashing-day.html');
+INSERT IGNORE INTO `information` (`id`, `title`, `content`, `image_url`, `createdAt`, `updatedAt`, `category`, `source`) VALUES
+(5, 'Pentingnya Imunisasi untuk Anak', 'Imunisasi melindungi anak dari penyakit berbahaya seperti campak, polio, dan hepatitis. Pemerintah menyarankan imunisasi lengkap pada tahun pertama kehidupan anak.', '/static/uploads/6ef7a0d374a0417c951a7ce97fa0ac97.png', '2025-05-21 07:50:51', '2025-05-21 07:50:51', 'Kesehatan Anak', 'https://www.kemkes.go.id/article/view/202103170001/pentingnya-imunisasi-bagi-anak.html'),
+(6, 'Manfaat ASI Eksklusif Selama 6 Bulan', 'ASI eksklusif mengandung nutrisi penting dan antibodi yang membantu meningkatkan daya tahan tubuh bayi. WHO menyarankan pemberian ASI eksklusif selama 6 bulan pertama.', '/static/uploads/27aa330c8b204b809cd3953c73d9f8ff.png', '2025-05-21 07:58:22', '2025-05-21 07:58:22', 'Gizi Bayi', 'https://www.alodokter.com/asi-eksklusif'),
+(7, 'Cara Menjaga Kesehatan Ibu Hamil', 'Ibu hamil perlu menjaga pola makan sehat, rutin berolahraga ringan, dan memeriksakan kehamilan secara berkala ke bidan atau dokter kandungan.', '/static/uploads/5158da5904bc43dabe3c3a9f604d27fa.png', '2025-05-21 08:02:39', '2025-05-21 08:02:39', 'Kehamilan', 'https://hellosehat.com/kehamilan/kesehatan-ibu-hamil/menjaga-kesehatan-ibu-hamil'),
+(8, 'Stunting pada Anak: Penyebab dan Pencegahan', 'Stunting adalah kondisi gagal tumbuh akibat kekurangan gizi kronis. Pencegahan dilakukan sejak 1000 hari pertama kehidupan anak dengan nutrisi yang cukup dan pola asuh yang baik.', '/static/uploads/1faff06b31c44adc88d046789905e4bd.png', '2025-05-21 08:05:17', '2025-05-21 08:05:17', 'Stunting', 'ttps://www.who.int/indonesia/news/detail/06-03-2020-pencegahan-stunting'),
+(9, 'Tips Mencegah Diare pada Balita', 'Cuci tangan sebelum makan dan setelah buang air, serta pastikan air minum yang diberikan sudah matang. Diare bisa menyebabkan dehidrasi berat pada anak.', '/static/uploads/1f1b826f173a4e61b9194b64667a9148.png', '2025-05-21 08:07:11', '2025-05-21 08:07:11', 'Penyakit Anak', 'https://www.cdc.gov/handwashing/global-handwashing-day.html');
 
 -- --------------------------------------------------------
 
@@ -151,15 +151,15 @@ INSERT IGNORE INTO `users` (`id`, `name`, `email`, `createdAt`, `updatedAt`, `ha
 --
 -- Indexes for table `alembic_version`
 --
--- ALTER TABLE `alembic_version`
---   ADD PRIMARY KEY (`version_num`);
+ALTER TABLE `alembic_version`
+  ADD PRIMARY KEY (`version_num`);
 
--- --
--- -- Indexes for table `information`
--- --
--- ALTER TABLE `information`
---   ADD PRIMARY KEY (`id`),
---   ADD KEY `ix_information_id` (`id`);
+--
+-- Indexes for table `information`
+--
+ALTER TABLE `information`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ix_information_id` (`id`);
 
 --
 -- Indexes for table `toddlers`

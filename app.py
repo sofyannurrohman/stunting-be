@@ -16,7 +16,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # CORS setup
 origins = [
     "http://localhost:5173",  # Vite dev server
-    # Tambahkan domain frontend production jika sudah ada
+    "https://stunting-admin.vercel.app",
 ]
 
 app.add_middleware(
