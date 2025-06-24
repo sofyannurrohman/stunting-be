@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Request
 from api.v1.routers import predict
 from api.v1.routers import user, toddler, information, auth, admin
 from db.models.user import User
@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from alembic import command
 from alembic.config import Config
+from fastapi.responses import RedirectResponse
 app = FastAPI()
 
 # Mount static files (if needed)
@@ -25,6 +26,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# Force HTTPS for all requests
+@app.middleware("http")
+async def force_https(request: Request, call_next):
+    if request.headers.get("x-forwarded-proto", "http") != "https":
+        url = request.url._url.replace("http://", "https://")
+        return RedirectResponse(url, status_code=307)
+    response = await call_next(request)
+    # Ensure response headers use HTTPS
+    if "location" in response.headers and response.headers["location"].startswith("http://"):
+        response.headers["location"] = response.headers["location"].replace("http://", "https://")
+    return response
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1")
