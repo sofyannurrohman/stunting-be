@@ -53,3 +53,8 @@ async def init_db():
     except Exception as e:
         print("Error during alembic upgrade:", str(e))
         return {"error": str(e)}
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))  # Railway provides this
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
