@@ -112,7 +112,7 @@ Tolong berikan **rekomendasi menu sehat** untuk balita ini, dengan:
                 age_months=data.age_months,
                 height_cm=data.height_cm,
                 weight_kg=data.weight_kg,
-                prediction_result=prediction_result
+                predicted=prediction_result
             )
             await create_toddler(db, toddler_in)
 
