@@ -21,6 +21,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://stunting-admin.vercel.app",
+        "http://localhost:34841"
     ],  # Ganti ini dengan domain spesifik untuk security lebih baik
     allow_credentials=True,
     allow_methods=["*"],
