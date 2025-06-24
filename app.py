@@ -14,14 +14,13 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # CORS setup
-origins = [
-    "http://localhost:5173",  # Vite dev server
-    "https://stunting-admin.vercel.app",
-]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Ganti ini dengan domain spesifik untuk security lebih baik
+    allow_origins=[
+        "http://localhost:5173",
+        "https://stunting-admin.vercel.app",
+    ],  # Ganti ini dengan domain spesifik untuk security lebih baik
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
