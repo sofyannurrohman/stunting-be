@@ -18,11 +18,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://stunting-admin.vercel.app",
-        "http://localhost:34841"
-    ],  # Ganti ini dengan domain spesifik untuk security lebih baik
+    allow_origins=["*", "null"],  # Ganti ini dengan domain spesifik untuk security lebih baik
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
