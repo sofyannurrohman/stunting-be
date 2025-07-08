@@ -1,13 +1,19 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, date
 from typing import Optional
+
 class ToddlerBase(BaseModel):
     gender: str
-    name:str
+    name: str
     age_months: int
     height_cm: float
     weight_kg: float
     predicted: str | None = None
+
+    # ✅ New optional fields
+    nik: str | None = None
+    tanggal_lahir: date | None = None
+    tempat_lahir: str | None = None
 
 class ToddlerCreate(BaseModel):
     name: str
@@ -15,8 +21,14 @@ class ToddlerCreate(BaseModel):
     gender: str
     weight_kg: float
     height_cm: float
-    user_id: int  # Add this field if it's passed from the client
+    user_id: int
     predicted: str | None = None
+
+    # ✅ New fields
+    nik: str | None = None
+    tanggal_lahir: date | None = None
+    tempat_lahir: str | None = None
+
     class Config:
         orm_mode = True
 
@@ -27,6 +39,11 @@ class ToddlerUpdate(BaseModel):
     weight_kg: float | None = None
     predicted: str | None = None
 
+    # ✅ New fields
+    nik: str | None = None
+    tanggal_lahir: date | None = None
+    tempat_lahir: str | None = None
+
 class ToddlerRead(BaseModel):
     id: int
     name: str
@@ -34,10 +51,16 @@ class ToddlerRead(BaseModel):
     gender: str
     weight_kg: float
     height_cm: float
-    user_id: int  # Include user_id if you want to show the associated user
+    user_id: int
     predicted: str | None = None
-    createdAt: datetime  # Add createdAt field
-    updatedAt: datetime  
+    createdAt: datetime
+    updatedAt: datetime
+
+    # ✅ New fields
+    nik: str | None = None
+    tanggal_lahir: date | None = None
+    tempat_lahir: str | None = None
+
     class Config:
         orm_mode = True
 

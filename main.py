@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI, Depends, Request
 from api.v1.routers import predict
-from api.v1.routers import user, toddler, information, auth, admin
+from api.v1.routers import user, toddler, information, auth, admin, child_profile
 from db.models.user import User
 from utils.dependencies import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
@@ -18,22 +18,22 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*", "null"],  # Ganti ini dengan domain spesifik untuk security lebih baik
+    allow_origins=["*", "null"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 # Force HTTPS for all requests
-@app.middleware("http")
-async def force_https(request: Request, call_next):
-    if request.headers.get("x-forwarded-proto", "http") != "https":
-        url = request.url._url.replace("http://", "https://")
-        return RedirectResponse(url, status_code=307)
-    response = await call_next(request)
-    # Ensure response headers use HTTPS
-    if "location" in response.headers and response.headers["location"].startswith("http://"):
-        response.headers["location"] = response.headers["location"].replace("http://", "https://")
-    return response
+# @app.middleware("http")
+# async def force_https(request: Request, call_next):
+#     if request.headers.get("x-forwarded-proto", "http") != "https":
+#         url = request.url._url.replace("http://", "https://")
+#         return RedirectResponse(url, status_code=307)
+#     response = await call_next(request)
+#     # Ensure response headers use HTTPS
+#     if "location" in response.headers and response.headers["location"].startswith("http://"):
+#         response.headers["location"] = response.headers["location"].replace("http://", "https://")
+#     return response
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1")
@@ -42,6 +42,7 @@ app.include_router(toddler.router, prefix="/api/v1")
 app.include_router(information.router, prefix="/api/v1")
 app.include_router(predict.router, prefix="/api/v1")
 app.include_router(admin.router, prefix="/api/v1")
+app.include_router(child_profile.router, prefix="/api/v1")
 # Sample protected endpoint
 @app.get("/me")
 def read_user(current_user: User = Depends(get_current_user)):
@@ -67,4 +68,4 @@ async def init_db():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

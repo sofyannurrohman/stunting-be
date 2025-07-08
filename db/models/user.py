@@ -7,14 +7,13 @@ class User(Base):
     __tablename__ = "users"
     
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String(255), unique=True, index=True)  # Added length for VARCHAR
-    name = Column(String(255))  # Added length for VARCHAR
-    hashed_password = Column(String(255))  # Added length for VARCHAR
-   
-    # Timestamps
+    email = Column(String(255), unique=True, index=True)
+    name = Column(String(255))
+    hashed_password = Column(String(255))
+    rt = Column(String(255), nullable=True)
+    rw = Column(String(255), nullable=True)
     createdAt = Column(DateTime, server_default=func.now())  # Automatically set on insert
     updatedAt = Column(DateTime, server_default=func.now(), onupdate=func.now())  # Automatically set on insert and update
     role = Column(String(20), nullable=False, default="user")
-
-# One-to-Many Relationship to Toddler
-    toddlers = relationship("Toddler", back_populates="user", cascade="all, delete-orphan")
+# Inside your User class
+child_profiles = relationship("ChildProfile", back_populates="user")

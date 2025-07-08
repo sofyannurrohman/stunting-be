@@ -12,7 +12,11 @@ async def create_toddler(db: AsyncSession, toddler_in: ToddlerCreate):
         gender=toddler_in.gender,
         weight_kg=toddler_in.weight_kg,
         height_cm=toddler_in.height_cm,
-        user_id=toddler_in.user_id  # Associating the toddler with the parent user
+        predicted=toddler_in.predicted,
+        user_id=toddler_in.user_id,
+        nik=toddler_in.nik,
+        tanggal_lahir=toddler_in.tanggal_lahir,
+        tempat_lahir=toddler_in.tempat_lahir
     )
     db.add(db_toddler)
     await db.commit()

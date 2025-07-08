@@ -8,7 +8,7 @@ from db.base import Base
 from db.models.user import User  # Ensure models are imported
 from db.models.toddler import Toddler
 from db.models.information import Information
-
+from db.models.child_profile import ChildProfile
 # Load environment variables from .env
 load_dotenv()
 
