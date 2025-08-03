@@ -14,8 +14,10 @@ class ChildProfileCreate(ChildProfileBase):
 
 class ChildProfileUpdate(BaseModel):
     name: Optional[str] = None
+    nik: Optional[str]
     tanggal_lahir: Optional[date] = None
     tempat_lahir: Optional[str] = None
+    user_id: Optional[int] = None
 
 class ChildProfileRead(ChildProfileBase):
     id: int

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Text
 from sqlalchemy.sql import func
 from db.base import Base
 
@@ -9,7 +9,7 @@ class Information(Base):
     
     # Added length for VARCHAR columns
     title = Column(String(255))  # Added length for VARCHAR
-    content = Column(String(1000))  # Added length for VARCHAR, content can be longer
+    content = Column(Text)  # Added length for VARCHAR, content can be longer
     image_url = Column(String(255))  # Added length for VARCHAR
     category = Column(String(255))
     source = Column(String(255))

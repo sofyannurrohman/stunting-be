@@ -15,5 +15,4 @@ class User(Base):
     createdAt = Column(DateTime, server_default=func.now())  # Automatically set on insert
     updatedAt = Column(DateTime, server_default=func.now(), onupdate=func.now())  # Automatically set on insert and update
     role = Column(String(20), nullable=False, default="user")
-# Inside your User class
-child_profiles = relationship("ChildProfile", back_populates="user")
+    child_profiles = relationship("ChildProfile", back_populates="user")

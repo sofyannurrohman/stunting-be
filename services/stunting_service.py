@@ -106,13 +106,12 @@ Tolong berikan **rekomendasi menu sehat** untuk balita ini, dengan:
 
             # Save to DB
             toddler_in = ToddlerCreate(
-                name=data.name,
-                user_id=data.user_id,
                 gender=data.gender,
                 age_months=data.age_months,
                 height_cm=data.height_cm,
                 weight_kg=data.weight_kg,
-                predicted=prediction_result
+                predicted=prediction_result,
+                profile_id = data.profile_id
             )
             await create_toddler(db, toddler_in)
 
@@ -163,4 +162,19 @@ Tolong berikan **rekomendasi menu sehat** untuk balita ini, dengan:
         except Exception as e:
             yield json.dumps({"error": f"Prediction error: {str(e)}"}) + "\n"
 
+    async def predict_class_only(self, data: StuntingInput) -> str:
+        gender_mapping = {"Laki-laki": 0, "Perempuan": 1}
+        if data.gender not in gender_mapping:
+            raise ValueError("Invalid gender")
+
+        gender_encoded = gender_mapping[data.gender]
+        input_df = pd.DataFrame(
+            [[gender_encoded, data.age_months, data.height_cm, data.weight_kg]],
+            columns=["Jenis Kelamin", "Umur (bulan)", "Tinggi Badan (cm)", "Berat Badan (kg)"]
+        )
+
+        input_scaled = self.scaler.transform(input_df)
+        raw_prediction = self.model.predict(input_scaled)
+        decoded_prediction = self.le_condition.inverse_transform([raw_prediction[0]])
+        return decoded_prediction[0]
 stunting_service = StuntingService()

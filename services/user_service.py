@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from db.models.user import User
-from schemas.user_schema import UserCreate
+from schemas.user_schema import UserCreate, UserUpdate
 from utils.security import hash_password
 
 async def create_user(db: AsyncSession, user_in: UserCreate):
@@ -31,7 +31,7 @@ async def get_all_users(db: AsyncSession, skip: int = 0, limit: int = 10):
             user.name = "Unknown"  # or any default
     return users
 
-async def update_user(db: AsyncSession, user_id: int, user_in: UserCreate):
+async def update_user(db: AsyncSession, user_id: int, user_in: UserUpdate):
     user = await get_user(db, user_id)
     if not user:
         return None

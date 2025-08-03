@@ -2,7 +2,6 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 class StuntingInput(BaseModel):
-    name: str
     age_months: int
     weight_kg: float
     height_cm: float
@@ -13,7 +12,7 @@ class StuntingInput(BaseModel):
     pantangan: Optional[List[str]] = []
     gaya_hidup: Optional[str] = ""
     preferensi_menu: Optional[List[str]] = []
-    user_id: int
+    profile_id: int
 
 class StuntingPrediction(BaseModel):
     prediction: str

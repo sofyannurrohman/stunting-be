@@ -51,11 +51,26 @@ async def list_information(skip: int = 0, limit: int = 100, db: AsyncSession = D
     return await information_service.get_all_information(db, skip=skip, limit=limit)
 
 @router.put("/{info_id}", response_model=InformationRead)
-async def update_information(info_id: int, info_in: InformationUpdate, db: AsyncSession = Depends(get_session)):
-    info = await information_service.update_information(db, info_id, info_in)
+async def update_information(
+    info_id: int,
+    title: str = Form(None),
+    content: str = Form(None),
+    category: str = Form(None),
+    source: str = Form(None),
+    image: UploadFile | None = File(None),
+    db: AsyncSession = Depends(get_session)
+):
+    info_in = InformationUpdate(
+        title=title,
+        content=content,
+        category=category,
+        source=source
+    )
+    info = await information_service.update_information(db, info_id, info_in, image)
     if not info:
         raise HTTPException(status_code=404, detail="Information not found")
     return info
+
 
 @router.delete("/{info_id}", response_model=InformationRead)
 async def delete_information(info_id: int, db: AsyncSession = Depends(get_session)):

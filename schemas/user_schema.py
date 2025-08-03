@@ -13,13 +13,15 @@ class UserRead(BaseModel):
     email: str
     name: str
     role: str
-    rt: str
-    rw: str
+    rt: str | None = None
+    rw: str | None = None
     class Config:
         from_attributes = True
 
 class UserUpdate(BaseModel):
     name: str | None = None
+    email: str | None = None
+    role: str | None = None
     rt: str | None = None
     rw: str | None = None
 class UserOut(BaseModel):

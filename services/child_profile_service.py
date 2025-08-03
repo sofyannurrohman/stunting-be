@@ -10,6 +10,14 @@ async def create_child_profile(db: AsyncSession, profile_in: ChildProfileCreate)
     await db.refresh(profile)
     return profile
 
+async def get_all_child_profiles(db: AsyncSession) -> list[ChildProfile]:
+    result = await db.execute(select(ChildProfile))
+    return result.scalars().all()
+
+async def get_child_profiles_by_user_id(db: AsyncSession, user_id: int) -> list[ChildProfile]:
+    result = await db.execute(select(ChildProfile).where(ChildProfile.user_id == user_id))
+    return result.scalars().all()
+
 async def get_child_profile_by_nik(db: AsyncSession, nik: str):
     result = await db.execute(select(ChildProfile).where(ChildProfile.nik == nik))
     return result.scalar_one_or_none()
