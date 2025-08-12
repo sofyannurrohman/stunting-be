@@ -24,16 +24,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # Force HTTPS for all requests
-# @app.middleware("http")
-# async def force_https(request: Request, call_next):
-#     if request.headers.get("x-forwarded-proto", "http") != "https":
-#         url = request.url._url.replace("http://", "https://")
-#         return RedirectResponse(url, status_code=307)
-#     response = await call_next(request)
-#     # Ensure response headers use HTTPS
-#     if "location" in response.headers and response.headers["location"].startswith("http://"):
-#         response.headers["location"] = response.headers["location"].replace("http://", "https://")
-#     return response
+@app.middleware("http")
+async def force_https(request: Request, call_next):
+    if request.headers.get("x-forwarded-proto", "http") != "https":
+        url = request.url._url.replace("http://", "https://")
+        return RedirectResponse(url, status_code=307)
+    response = await call_next(request)
+    # Ensure response headers use HTTPS
+    if "location" in response.headers and response.headers["location"].startswith("http://"):
+        response.headers["location"] = response.headers["location"].replace("http://", "https://")
+    return response
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1")
